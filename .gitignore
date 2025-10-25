@@ -1,0 +1,21 @@
+bin/
+obj/
+Debug/
+Release/
+
+# 임시 파일
+*.tmp
+*.log
+*.tlog
+*.plg
+
+# 사용자별 설정
+*.user
+*.suo
+*.ncb
+
+# 기타
+*.aps
+*.res
+*.pch
+*.pdb
