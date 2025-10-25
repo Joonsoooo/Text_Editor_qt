@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>main_windowClass</class>
+ <widget class="QMainWindow" name="main_windowClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>616</width>
+    <height>436</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>text_editor</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>616</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="file_menu">
+    <property name="title">
+     <string>파일</string>
+    </property>
+    <addaction name="save_act"/>
+    <addaction name="save_as_act"/>
+    <addaction name="load_act"/>
+   </widget>
+   <addaction name="file_menu"/>
+  </widget>
+  <action name="save_act">
+   <property name="text">
+    <string>저장</string>
+   </property>
+  </action>
+  <action name="load_act">
+   <property name="text">
+    <string>불러오기</string>
+   </property>
+  </action>
+  <action name="save_as_act">
+   <property name="text">
+    <string>다른 이름으로 저장</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="../Resource Files/main_window.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,3 +1,4 @@
+# Visual Studio 빌드 출력 폴더
 bin/
 obj/
 Debug/
@@ -14,8 +15,17 @@ Release/
 *.suo
 *.ncb
 
-# 기타
+# 기타 Visual Studio 관련 파일
 *.aps
 *.res
 *.pch
 *.pdb
+
+# Visual Studio 인덱스 및 캐시 파일
+*.vsidx
+*.db
+*.json
+*.ipch
+
+# Visual Studio 임시 IDE 파일
+.vs/
