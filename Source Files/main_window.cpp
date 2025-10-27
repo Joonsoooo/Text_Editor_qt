@@ -4,6 +4,8 @@
 #include "save_load_handler.h"
 
 #include <QFileDialog>
+#include <filesystem>
+#include <QPushButton>
 
 main_window::main_window(QWidget *parent)
     : QMainWindow(parent)
@@ -12,8 +14,13 @@ main_window::main_window(QWidget *parent)
 
     connect(m_ui.load_act, &QAction::triggered, this, &main_window::load_act);
 
-	m_model = new text_model();
 	m_save_load_hndlr = new save_load_handler();
+
+
+    m_ui.tab_qhlay->setAlignment(Qt::AlignLeft);
+
+    //m_ui.text_tab->clear();
+
 }
 
 main_window::~main_window()
@@ -28,11 +35,11 @@ void main_window::load_act()
 
     for (auto const& file : file_list) 
     {
-        cout << file.toLocal8Bit().constData() << endl;
+        text_model* model = m_save_load_hndlr->load(file);
 
+        add_tab(model);
 	}
 
-	//m_save_load_hndlr->load
 }
 
 QStringList main_window::multi_selection_file()
@@ -56,8 +63,49 @@ vector<QString> main_window::get_file_list(QStringList files)
 
     for (const auto& file : files) 
     {
-        file_list.push_back(file);
+        //cout << file.toLocal8Bit().constData() << endl;
+
+		m_save_load_hndlr->load(file);
+
+		file_list.push_back(file);
     }
 
     return file_list;
+}
+
+void main_window::add_tab(text_model* model)
+{
+    QPushButton* tab_btn = create_tab_btn();
+
+	tab_info* new_tab = new tab_info();
+
+	new_tab->model = model;
+	new_tab->tab_btn = tab_btn;
+
+	m_tab_list.push_back(new_tab);
+
+    m_ui.tab_qhlay->addWidget(tab_btn);
+
+    //m_ui.tab_qhlay->setContentsMargins(0, 0, 0, 0);
+    //m_ui.tab_qhlay->setSpacing(0);
+
+    //m_ui.tab_qhlay->addStretch();
+
+}
+
+QPushButton* main_window::create_tab_btn()
+{
+	QPushButton* tab_btn = new QPushButton(this);
+
+	tab_btn->setText("탭" + QString::number(m_tab_list.size() + 1));
+	tab_btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    tab_btn->setMaximumWidth(100);
+
+    return tab_btn;
+}
+
+text_model* main_window::file_to_model(const QString& file_path)
+{
+
+    return new text_model();
 }

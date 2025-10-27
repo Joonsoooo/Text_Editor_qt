@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <string>
+#include <QString>
 
 using namespace std;
 
@@ -11,6 +11,6 @@ class save_load_handler
 public:
 	void save(text_model* model);
 
-	text_model* load(string file_path);
+	text_model* load(QString file_path);
 };
 
