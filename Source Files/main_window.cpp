@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <filesystem>
 #include <QPushButton>
+#include <QTextEdit>
 
 main_window::main_window(QWidget *parent)
     : QMainWindow(parent)
@@ -17,9 +18,7 @@ main_window::main_window(QWidget *parent)
 	m_save_load_hndlr = new save_load_handler();
 
 
-    m_ui.tab_qhlay->setAlignment(Qt::AlignLeft);
-
-    //m_ui.text_tab->clear();
+    //m_ui.tab_qhlay->setAlignment(Qt::AlignLeft);
 
 }
 
@@ -33,12 +32,16 @@ void main_window::load_act()
     QStringList files = multi_selection_file();
 	vector<QString> file_list = get_file_list(files);
 
-    for (auto const& file : file_list) 
+    for (int i = 0; i < file_list.size(); ++i) 
     {
-        text_model* model = m_save_load_hndlr->load(file);
+        text_model* model = m_save_load_hndlr->load(file_list[i]);
 
-        add_tab(model);
+        create_tab_info(model);
 	}
+ //   for (auto const& file : file_list) 
+ //   {
+ //       text_model* model = m_save_load_hndlr->load(file);
+	//}
 
 }
 
@@ -73,24 +76,48 @@ vector<QString> main_window::get_file_list(QStringList files)
     return file_list;
 }
 
-void main_window::add_tab(text_model* model)
+void main_window::create_tab_info(text_model* model)
 {
-    QPushButton* tab_btn = create_tab_btn();
+    /*QPushButton* tab_btn = create_tab_btn();
+
+    QTextEdit* text_ed = new QTextEdit(this);
 
 	tab_info* new_tab = new tab_info();
 
+	int size = m_tab_list.size();
+
 	new_tab->model = model;
 	new_tab->tab_btn = tab_btn;
+	new_tab->text_ed = text_ed;
+	new_tab->index = size;
 
 	m_tab_list.push_back(new_tab);
 
-    m_ui.tab_qhlay->addWidget(tab_btn);
+    m_ui.tab_qhlay->addWidget(tab_btn);*/
 
-    //m_ui.tab_qhlay->setContentsMargins(0, 0, 0, 0);
-    //m_ui.tab_qhlay->setSpacing(0);
+    tab_info* new_tab = new tab_info();
 
-    //m_ui.tab_qhlay->addStretch();
+    QTextEdit* text_ed = new QTextEdit(this);
 
+    new_tab->model = model;
+	new_tab->text_ed = text_ed;
+
+    // 모델을 텍스트 에디터에 파서
+
+    if (m_tab_list.empty())
+    {
+        m_tab_wid = new QTabWidget(this);
+
+        m_ui.central_lay->addWidget(m_tab_wid);
+
+        connect(m_tab_wid, SIGNAL(currentChanged(int)), this, SLOT(tab_change(int)));
+    }
+    
+    QString tab_name = "탭" + QString::number(m_tab_list.size() + 1);
+
+    m_tab_wid->addTab(text_ed, tab_name);
+
+    m_tab_list.push_back(new_tab);
 }
 
 QPushButton* main_window::create_tab_btn()
@@ -108,4 +135,9 @@ text_model* main_window::file_to_model(const QString& file_path)
 {
 
     return new text_model();
+}
+
+void main_window::tab_change(int index)
+{
+	cout << "tab change: " << index << endl;
 }
