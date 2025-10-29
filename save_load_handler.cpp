@@ -8,7 +8,24 @@
 
 void save_load_handler::save(text_model* model)
 {
+	string file_path = model->get_filepath() + "/" + model->get_filename();
 
+    cout << file_path;
+
+    QFile file(QString::fromLocal8Bit(file_path.c_str()));
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) 
+    {
+        cout << "file not opened";
+
+        return;
+    }
+
+    QTextStream out(&file);
+
+    out << model->get_text();
+
+	file.close();
 }
 
 text_model* save_load_handler::load(QString file_path)

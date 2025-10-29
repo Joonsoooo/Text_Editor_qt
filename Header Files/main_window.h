@@ -34,6 +34,7 @@ public:
 
 public:
     void load_act();
+    void save_act();
 
     QStringList multi_selection_file();
     vector<QString> get_file_list(QStringList files);
@@ -42,10 +43,13 @@ public:
     QPushButton* create_tab_btn();
 
 	text_model* file_to_model(const QString& file_path);
+
+    QTextEdit* txt_to_text_ed(const QString& text);
     
 private slots:
-	void tab_change(int index);
-
+	void change_tab(int index);
+	void db_click_tab(int index);
+	void right_click_tab(const QPoint& pos);
 
 private:
     vector<tab_info*> m_tab_list;

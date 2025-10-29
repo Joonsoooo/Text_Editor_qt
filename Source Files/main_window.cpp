@@ -14,6 +14,7 @@ main_window::main_window(QWidget *parent)
     m_ui.setupUi(this);
 
     connect(m_ui.load_act, &QAction::triggered, this, &main_window::load_act);
+    connect(m_ui.save_act, &QAction::triggered, this, &main_window::save_act);
 
 	m_save_load_hndlr = new save_load_handler();
 
@@ -43,6 +44,34 @@ void main_window::load_act()
  //       text_model* model = m_save_load_hndlr->load(file);
 	//}
 
+}
+
+void main_window::save_act()
+{
+    if (m_tab_list.empty())
+    {
+        // 예외 코드
+    }
+    else
+    {
+        text_model* model = m_tab_list[m_selected]->model;
+
+        QTextEdit* text_ed = (QTextEdit*)(m_tab_wid->currentWidget());
+
+        if (text_ed) 
+        {
+            QString text = text_ed->toPlainText();
+
+			model->set_text(text);
+
+		    m_save_load_hndlr->save(model);
+        }
+        else
+        {
+			// 예외 코드
+
+        }
+    }
 }
 
 QStringList main_window::multi_selection_file()
@@ -97,20 +126,25 @@ void main_window::create_tab_info(text_model* model)
 
     tab_info* new_tab = new tab_info();
 
-    QTextEdit* text_ed = new QTextEdit(this);
+	QTextEdit* text_ed = txt_to_text_ed(model->get_text());
 
     new_tab->model = model;
 	new_tab->text_ed = text_ed;
 
-    // 모델을 텍스트 에디터에 파서
+
 
     if (m_tab_list.empty())
     {
         m_tab_wid = new QTabWidget(this);
 
+        m_tab_wid->setContextMenuPolicy(Qt::CustomContextMenu);
+
         m_ui.central_lay->addWidget(m_tab_wid);
 
-        connect(m_tab_wid, SIGNAL(currentChanged(int)), this, SLOT(tab_change(int)));
+        connect(m_tab_wid, SIGNAL(currentChanged(int)), this, SLOT(change_tab(int)));
+        connect(m_tab_wid, SIGNAL(tabBarDoubleClicked(int)), this, SLOT(db_click_tab(int)));
+        connect(m_tab_wid, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(right_click_tab(const QPoint&)));
+
     }
     
     QString tab_name = "탭" + QString::number(m_tab_list.size() + 1);
@@ -118,6 +152,8 @@ void main_window::create_tab_info(text_model* model)
     m_tab_wid->addTab(text_ed, tab_name);
 
     m_tab_list.push_back(new_tab);
+
+
 }
 
 QPushButton* main_window::create_tab_btn()
@@ -137,7 +173,29 @@ text_model* main_window::file_to_model(const QString& file_path)
     return new text_model();
 }
 
-void main_window::tab_change(int index)
+QTextEdit* main_window::txt_to_text_ed(const QString& text)
+{
+	QTextEdit* text_ed = new QTextEdit(this);
+
+	text_ed->setText(text);
+
+    //setText 하는 과정에서 가로 길이에 맞게 자동 줄내림하는 루틴 필요 (이미 있네)
+
+    return text_ed;
+}
+
+void main_window::db_click_tab(int index)
+{
+	cout << "tab db click: " << index << endl;
+}
+
+void main_window::right_click_tab(const QPoint& pos)
+{
+    cout << "tab right click: " << endl;
+
+}
+
+void main_window::change_tab(int index)
 {
 	cout << "tab change: " << index << endl;
 }
