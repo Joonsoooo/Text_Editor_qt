@@ -11,10 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="save_load_handler.cpp" />
     <ClCompile Include="Source Files\main.cpp" />
     <ClCompile Include="Source Files\main_window.cpp" />
-    <ClCompile Include="text_model.cpp" />
+    <ClCompile Include="Source Files\save_load_handler.cpp" />
+    <ClCompile Include="Source Files\tab_mgr.cpp" />
+    <ClCompile Include="Source Files\text_model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource Files\main_window.qrc" />
@@ -26,9 +27,10 @@
     <QtUic Include="Form Files\main_window.ui" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="Header Files\pch.h" />
+    <QtMoc Include="Header Files\tab_mgr.h" />
+    <ClInclude Include="Header Files\text_model.h" />
     <ClInclude Include="save_load_handler.h" />
-    <ClInclude Include="text_model.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D24942A3-02A2-41B8-82DA-EDAA022653BF}</ProjectGuid>

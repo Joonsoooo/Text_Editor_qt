@@ -3,26 +3,14 @@
 #include <QtWidgets/QMainWindow>
 #include <QString>
 #include <vector>
+#include <QPushbutton>
+#include <QTextEdit>
 
 #include "ui_main_window.h"
+#include "text_model.h"
+#include "tab_mgr.h"
 
 using namespace std;
-
-class text_model;
-class save_load_handler;
-class QPushButton;
-class QTextEdit;
-
-struct tab_info
-{
-    /*text_model* model;
-	QPushButton* tab_btn;
-    QTextEdit* text_ed;
-    int index;*/
-
-    text_model* model;
-	QTextEdit* text_ed;
-};
 
 class main_window : public QMainWindow
 {
@@ -39,26 +27,12 @@ public:
     QStringList multi_selection_file();
     vector<QString> get_file_list(QStringList files);
 
-    void create_tab_info(text_model* model);
-    QPushButton* create_tab_btn();
-
 	text_model* file_to_model(const QString& file_path);
-
-    QTextEdit* txt_to_text_ed(const QString& text);
+    QTextEdit* txt_to_ed(const QString& text);
     
-private slots:
-	void change_tab(int index);
-	void db_click_tab(int index);
-	void right_click_tab(const QPoint& pos);
-
-private:
-    vector<tab_info*> m_tab_list;
-	save_load_handler* m_save_load_hndlr;
-    QTabWidget* m_tab_wid;
-
-    int m_selected;
 
 private:
     Ui::main_windowClass m_ui;
 
+	tab_mgr* m_tab_mgr;
 };

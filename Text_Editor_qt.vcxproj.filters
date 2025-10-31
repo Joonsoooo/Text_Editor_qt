@@ -29,10 +29,13 @@
     <ClCompile Include="Source Files\main_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="text_model.cpp">
+    <ClCompile Include="Source Files\save_load_handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="save_load_handler.cpp">
+    <ClCompile Include="Source Files\text_model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\tab_mgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -45,6 +48,9 @@
     <QtMoc Include="Header Files\main_window.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Header Files\tab_mgr.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Form Files\main_window.ui">
@@ -52,13 +58,13 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="text_model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="save_load_handler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Header Files\text_model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
