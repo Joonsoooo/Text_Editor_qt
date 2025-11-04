@@ -29,10 +29,10 @@ public:
 
 	text_model* file_to_model(const QString& file_path);
     QTextEdit* txt_to_ed(const QString& text);
-    
 
 private:
     Ui::main_windowClass m_ui;
 
 	tab_mgr* m_tab_mgr;
 };
+

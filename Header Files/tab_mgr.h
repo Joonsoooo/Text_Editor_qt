@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <iostream>
 #include <vector>
 #include <QObject>
 #include <QTabwidget>
@@ -23,6 +24,8 @@ public:
 		: QObject(parent), m_tab_wid(nullptr), m_selected(0) 
 	{ 
 		m_tab_wid = new QTabWidget();
+
+		cout << parent->objectName().toStdString() << endl;
 	}
 
 	~tab_mgr() {}

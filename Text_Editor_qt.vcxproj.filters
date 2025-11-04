@@ -38,6 +38,9 @@
     <ClCompile Include="Source Files\tab_mgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source Files\q_menus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource Files\main_window.qrc">
@@ -49,6 +52,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Header Files\tab_mgr.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Header Files\q_menus.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

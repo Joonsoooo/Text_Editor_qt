@@ -1,5 +1,6 @@
 ﻿#include "tab_mgr.h"
 #include "text_model.h"
+#include "q_menus.h"
 
 #include <iostream>
 #include <QTabbar>
@@ -38,7 +39,9 @@ void tab_mgr::right_click_tab(const QPoint& pos)
     if (tabIndex != -1) 
     {
         std::cout << "Right clicked tab index: " << tabIndex << std::endl;
-        // 필요한 작업 수행 (예: 컨텍스트 메뉴 표시)
+        
+		q_menus* tab_menu = new q_menus(m_tab_wid, MENU_TYPE::TAB);
+
     }
 }
 
