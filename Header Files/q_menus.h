@@ -9,21 +9,26 @@ enum MENU_TYPE
 
 };
 
+template<typename T>
 class q_menus : public QObject
 {
 	Q_OBJECT
 
 public:
-	q_menus(QWidget* parent = nullptr, MENU_TYPE type = NONE) : QObject(parent)
+	q_menus(QWidget* parent = nullptr, MENU_TYPE type = NONE, T data) : QObject(parent)
 	{
-		create_menu(type);
+		create_menu(type, data);
 	}
 
 	~q_menus() {}
 
-	void create_menu(MENU_TYPE type);
+	void create_menu(MENU_TYPE type, T* data);
+
+	void save();
 
 private:
 	QMenu* m_menu;
+
+	T* m_curr_data;
 };
 

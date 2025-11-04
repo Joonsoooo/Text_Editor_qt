@@ -22,7 +22,6 @@ void tab_mgr::create_tab_info(text_model* model)
 
         connect(m_tab_wid, SIGNAL(currentChanged(int)), this, SLOT(change_tab(int)));
         connect(m_tab_wid->tabBar(), &QTabBar::customContextMenuRequested, this, &tab_mgr::right_click_tab);
-
     }
     
     QString tab_name = "탭" + QString::number(m_tab_list.size() + 1);
@@ -39,7 +38,9 @@ void tab_mgr::right_click_tab(const QPoint& pos)
     if (tabIndex != -1) 
     {
         std::cout << "Right clicked tab index: " << tabIndex << std::endl;
-        
+     
+        m_selected = tabIndex;
+
 		q_menus* tab_menu = new q_menus(m_tab_wid, MENU_TYPE::TAB);
 
     }
