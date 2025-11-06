@@ -49,36 +49,36 @@ void main_window::load_act()
     delete save_load_hndl;
 }
 
-void main_window::save_act()
+void main_window::save_act(int selected_tab)
 {
-   // if (m_tab_list.empty())
-   // {
-   //     // 예외 코드
-   // }
-   // else
-   // {
-   //     text_model* model = m_tab_list[m_selected]->model;
+    if (m_tab_mgr->get_tab_list().empty())
+    {
+        // 예외 코드
+    }
+    else
+    {
+        text_model* model = m_tab_mgr->get_tab_list()[selected_tab]->model;
 
-   //     QTextEdit* text_ed = (QTextEdit*)(m_tab_wid->currentWidget());
+        QTextEdit* text_ed = (QTextEdit*)(m_tab_mgr->get_tab_widget()->currentWidget());
 
-   //     if (text_ed) 
-   //     {
-   //         QString text = text_ed->toPlainText();
+        if (text_ed) 
+        {
+            QString text = text_ed->toPlainText();
 
-			//model->set_text(text);
+			model->set_text(text);
 
-   //         save_load_handler* save_load_hndl = new save_load_handler();
+            save_load_handler* save_load_hndl = new save_load_handler();
 
-   //         save_load_hndl->save(model);
+            save_load_hndl->save(model);
 
-   //         delete save_load_hndl;
-   //     }
-   //     else
-   //     {
-			//// 예외 코드
+            delete save_load_hndl;
+        }
+        else
+        {
+			// 예외 코드
 
-   //     }
-   // }
+        }
+    }
 }
 
 QStringList main_window::multi_selection_file()
@@ -129,4 +129,9 @@ QTextEdit* main_window::txt_to_ed(const QString& text)
 	text_ed->setText(text);
 
     return text_ed;
+}
+
+void main_window::create_tab_menu(MENU_TYPE type)
+{
+
 }

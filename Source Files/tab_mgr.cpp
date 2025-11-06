@@ -1,6 +1,7 @@
 ﻿#include "tab_mgr.h"
 #include "text_model.h"
 #include "q_menus.h"
+#include "main_window.h"
 
 #include <iostream>
 #include <QTabbar>
@@ -41,7 +42,7 @@ void tab_mgr::right_click_tab(const QPoint& pos)
      
         m_selected = tabIndex;
 
-		q_menus* tab_menu = new q_menus(m_tab_wid, MENU_TYPE::TAB);
+        main_window::get().create_tab_menu();
 
     }
 }

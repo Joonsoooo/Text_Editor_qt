@@ -2,8 +2,18 @@
 #include "tab_mgr.h"
 #include "save_load_handler.h"
 
-template<typename T>
-void q_menus<T>::create_menu(MENU_TYPE type, T* data)
+q_menus::q_menus(tab_info* tab, MENU_TYPE type, QWidget* parent)
+{
+	create_menu(tab, type);
+}
+
+q_menus::~q_menus()
+{
+	delete m_menu;
+	delete m_tab_info;
+}
+
+void q_menus::create_menu(tab_info* tab, MENU_TYPE type)
 {
 	if (nullptr == m_menu)
 	{
@@ -13,14 +23,14 @@ void q_menus<T>::create_menu(MENU_TYPE type, T* data)
 	switch (type)
 	{
 	case TAB:
-		m_curr_data = data;
+		m_tab_info = tab;
 
 		QAction* saveAction = new QAction("저장", m_menu);
-		connect(saveAction, &QAction::triggered, this, );
+		connect(saveAction, &QAction::triggered, this, &q_menus::save_action);
 		m_menu->addAction(saveAction);
 
 		QAction* closeAction = new QAction("닫기", m_menu);
-		connect(closeAction, &QAction::triggered, this, &tab_mgr::onClose);
+		//connect(closeAction, &QAction::triggered, this, &tab_mgr::onClose);
 		m_menu->addAction(closeAction);
 		break;
 	}
@@ -29,10 +39,15 @@ void q_menus<T>::create_menu(MENU_TYPE type, T* data)
 	m_menu->exec(globalPos);
 }
 
-template<typename T>
-void q_menus<T>::save()
+void q_menus::save_action()
 {
-	tab_mgr* tab = (tab_mgr*)m_curr_data;
+	if (nullptr == m_tab_info)
+	{
+		cout << "q_menus::save_action - m_tab_info is nullptr" << endl;
 
-	tab->get_tab_list();
+		return;
+	}
+	save_load_handler* save_hndl = new save_load_handler();
+
+	save_hndl->save(m_tab_info->model);
 }

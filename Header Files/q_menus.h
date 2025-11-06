@@ -2,33 +2,31 @@
 #include <QObject>
 #include <QMenu>
 
-enum MENU_TYPE
-{
-	NONE = -1,
-	TAB = 0,
+#include "pch.h"
 
-};
+struct tab_info;
 
-template<typename T>
 class q_menus : public QObject
 {
 	Q_OBJECT
 
 public:
-	q_menus(QWidget* parent = nullptr, MENU_TYPE type = NONE, T data) : QObject(parent)
+	q_menus(MENU_TYPE type = NONE, QWidget* parent = nullptr) : QObject(parent)
 	{
-		create_menu(type, data);
 	}
 
-	~q_menus() {}
+	q_menus(tab_info* tab, MENU_TYPE type = NONE, QWidget* parent = nullptr);
 
-	void create_menu(MENU_TYPE type, T* data);
+	~q_menus();
 
-	void save();
+	void create_menu(tab_info* tab, MENU_TYPE type);
+
+private slots:
+	void save_action();
 
 private:
 	QMenu* m_menu;
 
-	T* m_curr_data;
+	tab_info* m_tab_info;
 };
 

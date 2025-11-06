@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header Files\pch.h" />
+    <ClInclude Include="singleton.h" />
     <QtMoc Include="Header Files\tab_mgr.h" />
     <QtMoc Include="Header Files\q_menus.h" />
     <ClInclude Include="Header Files\text_model.h" />
