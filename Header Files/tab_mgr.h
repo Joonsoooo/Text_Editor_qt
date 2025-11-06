@@ -36,6 +36,7 @@ public:
 	QTabWidget* get_tab_widget() const { return m_tab_wid; }
 	vector<tab_info*> get_tab_list() const { return m_tab_list; }
 
+	int get_selected() { return m_selected; }
 private slots:
 	void change_tab(int index);
 	void right_click_tab(const QPoint& pos);

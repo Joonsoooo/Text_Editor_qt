@@ -20,6 +20,7 @@ public:
 	~q_menus();
 
 	void create_menu(tab_info* tab, MENU_TYPE type);
+	void create_menu(MENU_TYPE type);
 
 private slots:
 	void save_action();

@@ -42,7 +42,7 @@ void tab_mgr::right_click_tab(const QPoint& pos)
      
         m_selected = tabIndex;
 
-        main_window::get().create_tab_menu();
+        main_window::get().create_tab_menu(TAB);
 
     }
 }

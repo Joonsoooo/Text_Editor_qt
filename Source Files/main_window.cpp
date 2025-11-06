@@ -2,6 +2,7 @@
 #include "main_window.h"
 #include "text_model.h"
 #include "save_load_handler.h"
+#include "q_menus.h"
 
 #include <QFileDialog>
 #include <filesystem>
@@ -133,5 +134,7 @@ QTextEdit* main_window::txt_to_ed(const QString& text)
 
 void main_window::create_tab_menu(MENU_TYPE type)
 {
+    q_menus* menu = new q_menus();
 
+    menu->create_menu(type);
 }
